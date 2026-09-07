@@ -13,7 +13,7 @@ class WeatherService(val context: Context) {
         context.getString(R.string.sunny),
     )
     fun getCities(): Array<String>{
-        return arrayOf("ciudad de mexico","obregon","guadalajara")
+        return arrayOf("ciudad de mexico","obregon","guadalajara", "china")
     }
     fun generateWeather(): Weather {
         val temp = ( -15 .. 50).random()
@@ -26,5 +26,9 @@ class WeatherService(val context: Context) {
             else ->  weatherIndex = 5
         }
         return Weather(temp,weatherStates[weatherIndex])
+    }
+
+    fun getWeather(city: String): Weather {
+        return generateWeather()
     }
 }
