@@ -1,20 +1,40 @@
 package com.example.miniweather_melendreza
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.miniweather_melendreza.utilities.WeatherService
 
 class CityActivity : AppCompatActivity() {
+
+    private lateinit var spinner: Spinner
+    private lateinit var btnSaveCity: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_city)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        spinner = findViewById(R.id.spinner)
+        btnSaveCity = findViewById(R.id.btn_save_city)
+
+        val weatherService = WeatherService(this)
+
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_dropdown_item,
+            weatherService.getCities()
+        )
+        spinner.adapter = adapter
+
+        btnSaveCity.setOnClickListener {
+            val selectedCity = spinner.selectedItem.toString()
+            val intent = Intent(this, MainActivity::class.java).apply {
+                putExtra("SELECTED_CITY", selectedCity)
+            }
+            startActivity(intent)
         }
     }
 }

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Miniweather_MelendrezA</string>
+    <string name="btn_sig">siguiente</string>
+    <string name="snowy">nevado</string>
+    <string name="windy">ventoso</string>
+    <string name="stormy">tormenta</string>
+    <string name="rainy">lluvioso</string>
+    <string name="cloudy">nublado</string>
+    <string name="sunny">soleado</string>
 </resources>
